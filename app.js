@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 
-app.get("/", function(req, res){
-    res.send("Myntra Page");
+app.get("/", function(req, res) {
+    res.sendFile(__dirname + "/index.html");
 })
 
-app.listen(3000, function(){
+app.listen(3000, function() {
     console.log(" Started server on port 3000");
 })
