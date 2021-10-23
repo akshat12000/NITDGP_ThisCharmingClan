@@ -1,0 +1,20 @@
+ .set-img {
+     height: 35vw;
+ }
+ 
+ .my-inner {
+     height: 35vw;
+     padding: 1% 7%;
+ }
+ 
+ .navbar {
+     background-color: #ebeef2 !important;
+ }
+ 
+ .link-section {
+     background-color: #FF6767;
+     color: #fffff4;
+     position: absolute;
+     text-align: center;
+     padding: 1%;
+ }
