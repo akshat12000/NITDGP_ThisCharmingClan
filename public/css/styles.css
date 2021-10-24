@@ -3,7 +3,7 @@
  }
  
  .my-inner {
-     height: 35vw;
+     height: 37vw;
      padding: 1% 7%;
  }
  
@@ -12,9 +12,47 @@
  }
  
  .link-section {
-     background-color: #FF6767;
-     color: #fffff4;
+     background-color: white;
+     color: #333;
      position: absolute;
+     font-size: 1vw;
      text-align: center;
      padding: 1%;
+ }
+ 
+ .link-section h5 {
+     font-size: 1.5vw;
+ }
+ 
+ .para,
+ .learn-more {
+     display: inline-block;
+     font-size: 1vw;
+ }
+ 
+ .my-card {
+     box-shadow: 5px 5px 20px #888;
+     border-radius: 10px;
+     padding: 1.5%;
+     margin: auto;
+     background-color: #FF6767;
+     color: azure;
+ }
+ 
+ .learn-more {
+     border: 1px solid azure;
+     border-radius: 10px;
+     text-decoration: none;
+     color: #333;
+     padding: 1vw;
+     background-color: azure;
+ }
+ 
+ .learn-more:hover {
+     background-color: #333;
+     color: azure;
+ }
+ 
+ .main-card-container {
+     margin: auto !important;
  }
