@@ -1,14 +1,14 @@
  .set-img {
-     height: 35vw;
+     height: 30vw;
  }
  
  .my-inner {
-     height: 37vw;
+     height: 30vw;
      padding: 1% 7%;
  }
  
  .navbar {
-     background-color: #ebeef2 !important;
+     background-color: #e4e4e4 !important;
  }
  
  .link-section {
