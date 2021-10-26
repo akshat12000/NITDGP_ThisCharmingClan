@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-
+const Article = require('./models/article')
+const articleRouter = require('./routes/articles')
+const methodOverride = require('method-override')
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
@@ -23,8 +25,11 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
-
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   session({
@@ -50,18 +55,21 @@ app.use((req, res, next) => {
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
-
 app.use(errorController.get404);
-
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true ,useUnifiedTopology: true })
   .then(result => {
-    app.get("/", function(req, res) {
-      res.sendFile(__dirname + "/index.html");
-  })
+  
   
     app.listen(5000);
   })
   .catch(err => {
     console.log(err);
   });
+
+  app.get('/blog', async (req, res) => {
+    const articles = await Article.find().sort({ createdAt: 'desc' })
+    res.render('articles/index', { articles: articles })
+  })
+  
+  app.use('/articles', articleRouter)
