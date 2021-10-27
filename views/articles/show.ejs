@@ -9,7 +9,8 @@
 </head>
 <body>
   <div class="container">
-    <h1 class="mb-1"><%= article.title %></h1>
+    <h1 class="mb-1"><%= article.title + "-" + article.name %></h1>
+    <h2 class="mb-1"><%= article.name %>></h2>
     <div class="text-muted mb-2">
       <%= article.createdAt.toLocaleDateString() %>
     </div>
