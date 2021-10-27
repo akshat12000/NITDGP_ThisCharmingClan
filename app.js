@@ -28,6 +28,7 @@ const authRoutes = require('./routes/auth');
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
+
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')));
@@ -39,6 +40,11 @@ app.use(
     store: store
   })
 );
+app.get('/blog', async (req, res) => {
+  const articles = await Article.find().sort({ createdAt: 'desc' })
+  res.render('articles/index', { articles: articles })
+})
+app.use('/articles', articleRouter)
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -52,10 +58,13 @@ app.use((req, res, next) => {
     .catch(err => console.log(err));
 });
 
+
+
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
 app.use(errorController.get404);
+
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true ,useUnifiedTopology: true })
   .then(result => {
@@ -66,10 +75,4 @@ mongoose
   .catch(err => {
     console.log(err);
   });
-
-  app.get('/blog', async (req, res) => {
-    const articles = await Article.find().sort({ createdAt: 'desc' })
-    res.render('articles/index', { articles: articles })
-  })
   
-  app.use('/articles', articleRouter)
