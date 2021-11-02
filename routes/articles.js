@@ -16,6 +16,12 @@ router.get('/:slug', async (req, res) => {
   if (article == null) res.redirect('/')
   res.render('articles/show', { article: article,curUser:req.session.user._id })
 })
+router.get('/:id', async (req, res) => {
+  const article = await Article.findOne(req.params.id)
+  console.log(article);
+  if (article == null) res.redirect('/')
+  res.render('articles/show', { article: article,curUser:req.session.user._id })
+})
 
 
 router.post('/', async (req, res) => {
@@ -38,12 +44,22 @@ router.post('/', async (req, res) => {
 
 })
 
-// router.post('/', async (req, res, next) => {
-//   req.article = new Article()
-//   res.usId=req.session.user._id;
+router.post('/upvote/:id',async(req,res)=>{
+ var article = await Article.findById(req.params.id)
+ var curUser=req.session.user._id;
+ var upUsers= article.votedUsers;
   
-//   next()
-// }, saveArticleAndRedirect('new'))
+  if(upUsers.indexOf(curUser)==-1){
+    article.voteCount+=1;
+    article.votedUsers.push(curUser);
+    await article.save();
+  }
+
+  res.redirect(`/articles/${article.slug}`);
+
+})
+
+
 
 router.put('/:id', async (req, res, next) => {
   req.article = await Article.findById(req.params.id)

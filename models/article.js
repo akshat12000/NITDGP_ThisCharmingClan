@@ -37,6 +37,15 @@ const articleSchema = new mongoose.Schema({
   sanitizedHtml: {
     type: String,
     required: true
+  },
+  voteCount: {
+    type: Number,
+    default: 0
+  },
+  votedUsers:{
+    type: Array,
+    default: []
+
   }
 })
 
