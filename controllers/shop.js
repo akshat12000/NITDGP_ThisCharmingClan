@@ -31,10 +31,21 @@ exports.getProduct = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
+exports.getIndex1 = (req, res, next) => {
+  
+     if(!req.session.isLoggedIn){
+        res.redirect('/login');
+    }
+    else
+    {
+      res.render('shop/index')
+    }
+    
+};
 exports.getIndex = (req, res, next) => {
   Product.find()
     .then(products => {
-      res.render('shop/index', {
+      res.render('auth/login', {
         prods: products,
         pageTitle: 'Shop',
         path: '/',
