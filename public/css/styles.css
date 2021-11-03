@@ -56,3 +56,15 @@
  .main-card-container {
      margin: auto !important;
  }
+ .modify-form {
+    margin: auto;
+    width: 50%;
+}
+
+.my-form {
+    margin: auto;
+}
+
+.my-form h2 {
+    text-align: center;
+}

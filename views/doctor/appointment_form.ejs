@@ -1,0 +1,47 @@
+<%- include("header.ejs"); -%>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="https://cdn.freelogovectors.net/svg08/myntra_logo-freelogovectors.net.svg" alt="" style="width:13vw; height:3vw;" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="/appointment_form/status">
+                        Status
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="my-form" style="margin: auto;">
+        <h2 style="text-align: center;">Appointment Form</h2>
+        <form class="modify-form" style="margin:auto; width:50%;" action="/appointment_form" method="post">
+            <div class="mb-3">
+                <label for="Pname" class="form-label">Patient Name</label>
+                <input type="text" class="form-control" id="Pname" name="Name" required>
+            </div>
+            <div class="mb-3">
+                <label for="Pcontact" class="form-label">Contact</label>
+                <input type="text" class="form-control" id="Pcontact" name="Contact">
+            </div>
+            <div class="mb-3">
+                <label for="Pdate" class="form-label">Date</label>
+                <input type="date" class="form-control" id="Pdate" name="Date" required>
+            </div>
+            <div class="mb-3">
+                <label for="Ptime" class="form-label">Time</label>
+                <input type="time" class="form-control" id="Ptime" name="Time" required>
+            </div>
+            <div class="mb-3">
+                <label for="Psymptoms" class="form-label">Symptoms</label>
+                <textarea class="form-control" id="Psymptoms" name="Symptoms" rows="5" cols="20" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    </body>
+
+    </html>

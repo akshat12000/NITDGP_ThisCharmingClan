@@ -1,0 +1,120 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+    <div class="backdrop"></div>
+<header class="main-header">
+    <button id="side-menu-toggle">Menu</button>
+    <nav class="main-header__nav">
+        <ul class="main-header__item-list">
+            <li class="main-header__item">
+                <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
+            </li>
+            <li class="main-header__item">
+                <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
+            </li>
+            <% if (isAuthenticated) { %>
+                <li class="main-header__item">
+                    <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
+                    </a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
+                    </a>
+                </li>
+            <% } %>
+        </ul>
+        <ul class="main-header__item-list">
+            <% if (!isAuthenticated) { %>
+                <li class="main-header__item">
+                    <a class="<%= path === '/login' ? 'active' : '' %>" href="/doctor/login">Login</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/signup' ? 'active' : '' %>" href="/doctor/signup">Signup</a>
+                </li>
+            <% } else { %>
+                <li class="main-header__item">
+                    <form action="/doctor/logout" method="post">
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+            <% } %>
+        </ul>
+    </nav>
+</header>
+
+<nav class="mobile-nav">
+    <ul class="mobile-nav__item-list">
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
+        </li>
+        <% if (isAuthenticated) { %>
+            <li class="mobile-nav__item">
+                <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+            </li>
+            <li class="mobile-nav__item">
+                <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+            </li>
+            <li class="mobile-nav__item">
+                <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
+                </a>
+            </li>
+            <li class="mobile-nav__item">
+                <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
+                </a>
+            </li>
+        <% } %>
+        <% if (!isAuthenticated) { %>
+            <li class="mobile-nav__item">
+                <a class="<%= path === '/login' ? 'active' : '' %>" href="/doctor/login">Login</a>
+            </li>
+            <li class="mobile-nav__item">
+                <a class="<%= path === '/signup' ? 'active' : '' %>" href="/doctor/signup">Signup</a>
+            </li>
+        <% } else { %>
+            <li class="mobile-nav__item">
+                <form action="/doctor/logout" method="post">
+                    <button type="submit">Logout</button>
+                </form>
+            </li>
+        <% } %>
+    </ul>
+</nav>
+
+    <main>
+        <form class="login-form" action="/doctor/signup" method="POST">
+            <div class="form-control">
+                <label for="email">E-Mail</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div class="form-control">
+                <label for="name">Name</label>
+                <input type="name" name="name" id="name">
+            </div>
+            <div class="form-control">
+                <label for="qualification">Qualification</label>
+                <input type="qualification" name="qualification" id="qualification">
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <div class="form-control">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" name="confirmPassword" id="confirmPassword">
+            </div>
+            <button class="btn" type="submit">Signup</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>
