@@ -1,21 +1,40 @@
 <%- include("header.ejs"); -%>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img src="https://cdn.freelogovectors.net/svg08/myntra_logo-freelogovectors.net.svg" alt="" style="width:13vw; height:3vw;" class="d-inline-block align-text-top">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="/appointment_form/status">
-                        Status
-                    </a>
-                </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img src="https://cdn.freelogovectors.net/svg08/myntra_logo-freelogovectors.net.svg" alt="" style="width:13vw; height:3vw;" class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="/appointment_form/status">
+                    Status
+                </a>
             </div>
         </div>
-    </nav>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <% if (!isAuthenticated) { %>
+                    <li class="main-header__item">
+                        <a  class="nav-link active" aria-current="page" href="/login">Login</a>
+                    </li>
+                    <li class="main-header__item">
+                        <a  class="nav-link active" aria-current="page" href="/signup">Signup</a>
+                    </li>
+                <% } else { %>
+                   
+                        <form action="/logout" method="post">
+                            <button type="submit">Logout</button>
+                        </form>
+                <% } %>
+              
+            </div>
+        </div>
+
+    </div>
+</nav>
     <div class="my-form" style="margin: auto;">
         <h2 style="text-align: center;">Appointment Form</h2>
         <form class="modify-form" style="margin:auto; width:50%;" action="/appointment_form" method="post">

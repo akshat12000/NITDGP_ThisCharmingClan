@@ -85,7 +85,7 @@ app.get("/appointment_form", (req, res) => {
 }
 else
 {
-  res.render("doctor/appointment_form");
+  res.render("doctor/appointment_form",{ isAuthenticated: true});
 }
   
 });
@@ -110,7 +110,7 @@ app.get("/appointment_form/status", (req, res) => {
           });
           appointment.save((err) => {
               if (!err) {
-                  res.redirect("/appointment_form/status");
+                  res.redirect("/appointment_form/status",{ isAuthenticated: true});
               } else {
                   console.log(err);
               }
@@ -145,7 +145,7 @@ app.get("/appointment_form/status", (req, res) => {
         else
         {
           Appointment.find({ }, (err, appointments) => {
-            res.render('doctor/doctor',{appointments:appointments,curUser:curUser});
+            res.render('doctor/doctor',{appointments:appointments,curUser:curUser, isAuthenticated: true});
             })
         }
  
