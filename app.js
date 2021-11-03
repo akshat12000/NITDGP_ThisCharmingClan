@@ -80,7 +80,14 @@ status: {
 var Appointment = mongoose.model("Appointment", appointmentSchema);
 
 app.get("/appointment_form", (req, res) => {
+  if(!req.session.isLoggedIn){
+    res.redirect('/login');
+}
+else
+{
   res.render("doctor/appointment_form");
+}
+  
 });
 
 app.get("/appointment_form/status", (req, res) => {
@@ -124,9 +131,15 @@ app.get("/appointment_form/status", (req, res) => {
 
       app.get("/doctor_portal", async (req, res) => {
         
-        var doctors=await Doctor.find({},'_id');
+        if(!req.session.isLoggedIn){
+          res.redirect('/doctor/login');
+      }
+      else
+      {
         var curUser=req.session.user._id;
-        if(doctors.indexOf(curUser)==-1){
+        const curdoc= await Doctor.findOne({_id:curUser});
+
+        if( curdoc==null){
             res.send("You don't have the permission to access the site")
         }
         else
@@ -136,7 +149,9 @@ app.get("/appointment_form/status", (req, res) => {
             })
         }
  
-                    
+               
+      }
+             
         
     });  
 
