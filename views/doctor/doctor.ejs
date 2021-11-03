@@ -18,8 +18,8 @@
         <div class="col-lg-6 col-md-6" style="border-right: 0.5px dotted #888;">
             <h3 style="text-align: center;">Requests</h3>
             <div class="row">
-                <%patientList.forEach((item)=>{ %>
-                    <% if(item.status==="Pending"){%>
+                <%appointments.forEach((item)=>{ %>
+                    <% if(item.status==="notAssigned"){%>
                         <div class="card col-lg-4 col-md-4" style="width: 18rem; margin:1% auto">
                             <div class="card-header">
                                 <strong>Name:</strong>
@@ -40,7 +40,7 @@
                                 </li>
                             </ul>
                             <form action="/confirm" method="post">
-                                <button type="submit" name="delbtn" class="btn-sm btn-danger" value=<%=[item._id,doctorList._id]%> style="margin:auto;">Confirm Appointment</button>
+                                <button type="submit" name="cnf" class="btn-sm btn-danger" value=<%=[item._id]%> style="margin:auto;">Confirm Appointment</button>
                             </form>
                         </div>
                         <%}%>
@@ -50,8 +50,8 @@
         <div class="col-lg-6 col-md-6">
             <h3 style="text-align: center;">Assigned</h3>
             <div class="row">
-                <%patientList.forEach((item)=>{ %>
-                    <% if((item.status==="Ongoing"||item.status==="Completed")){%>
+                <%appointments.forEach((item)=>{ %>
+                    <% if(((item.status==="assigned"&&item.doctorId==curUser)   )){%>
                         <div class="card col-lg-4 col-md-4" style="width: 18rem; margin:auto">
                             <div class="card-header">
                                 <strong>Name:</strong>
@@ -70,9 +70,14 @@
                                 <li class="list-group-item"><strong>Symptoms:</strong>
                                     <%=item.symptoms%>
                                 </li>
-                                <li class="list-group-item"><strong>Meet Link:</strong>
-                                    <%=item.meetLink%>
-                                </li>
+                                <div>
+                                <form action="<%=item.meetLink%>" method="get">
+                                    <button type="submit" name="cnf" class="btn-sm btn-danger"  style="margin:auto;">Meet Link</button>
+                                </form>
+                                <form action="/complete" method="post">
+                                    <button type="submit" name="cnf" class="btn-sm btn-danger" value=<%=[item._id]%> style="margin:auto;">Finish Appointment</button>
+                                </form>
+                            </div>
                             </ul>
                         </div>
                         <%}%>

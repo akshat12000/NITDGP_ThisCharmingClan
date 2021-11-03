@@ -45,23 +45,123 @@ app.use(
 
 const appointmentSchema = new mongoose.Schema({
   name: {
-      type: String,
-      required: [true, "Doctor's name required"]
-  },
-  qualifications: {
-      type: String
-  },
+    type: String,
+    required: [true, "Patient's name required"]
+},
+contact: {
+    type: String,
+},
+date: {
+    type: Date,
+    required: [true, "Date of appointment required"]
+},
+time: {
+    type: String,
+    required: [true, "Time of appointment required"]
+},
+symptoms: {
+    type: String,
+},
+status: {
+    type: String,
+    required: true
+},
   meetLink: {
       type: String,
   },
   patientId: {
       type: String
+  },
+  doctorId: {
+      type: String
   }
 });
 
-const Appointment = mongoose.model("Appointment", appointmentSchema);
+var Appointment = mongoose.model("Appointment", appointmentSchema);
 
+app.get("/appointment_form", (req, res) => {
+  res.render("doctor/appointment_form");
+});
 
+app.get("/appointment_form/status", (req, res) => {
+  const curUser=req.session.user._id;
+  Appointment.find({'patientId':curUser}, (err, appointments) => {
+    res.render('doctor/status',{appointments:appointments});
+    })
+  }
+        );
+
+        app.post("/appointment_form", (req, res) => {
+          const appointment = new Appointment({
+              name: req.body.Name,
+              contact: req.body.Contact,
+              date: req.body.Date,
+              time: req.body.Time,
+              symptoms: req.body.Symptoms,
+              status: "notAssigned",
+              patientId:req.session.user._id
+          });
+          appointment.save((err) => {
+              if (!err) {
+                  res.redirect("/appointment_form/status");
+              } else {
+                  console.log(err);
+              }
+          });
+      });
+
+      app.post("/delete", (req, res) => {
+        const currentId = req.body.delbtn;
+        
+        Appointment.findByIdAndRemove(currentId, function(err) {
+            if (!err) {
+                console.log("Item Deleted Successfully!");
+                res.redirect("/appointment_form");
+            }
+        });
+    
+    });
+
+      app.get("/doctor_portal", async (req, res) => {
+        
+        var doctors=await Doctor.find({},'_id');
+        var curUser=req.session.user._id;
+        if(doctors.indexOf(curUser)==-1){
+            res.send("You don't have the permission to access the site")
+        }
+        else
+        {
+          Appointment.find({ }, (err, appointments) => {
+            res.render('doctor/doctor',{appointments:appointments,curUser:curUser});
+            })
+        }
+ 
+                    
+        
+    });  
+
+    app.post("/confirm", (req, res) => {
+      const docId=req.session.user._id;
+      const appointmentId=req.body.cnf;
+      Appointment.updateOne({_id:appointmentId},{meetLink: "https://meet.jit.si/" + appointmentId,status: "assigned",doctorId:docId}, function (err,app){
+        if(err)
+        {
+          console.log(err)
+        }
+      });
+           res.redirect("/doctor_portal");
+  });
+  app.post("/complete", (req, res) => {
+    const docId=req.session.user._id;
+    const appointmentId=req.body.cnf;
+    Appointment.updateOne({_id:appointmentId},{status: "completed"}, function (err,app){
+      if(err)
+      {
+        console.log(err)
+      }
+    });
+         res.redirect("/doctor_portal");
+});
 
 app.get('/blog', async (req, res) => {
   const articles = await Article.find().sort({ createdAt: 'desc' })
