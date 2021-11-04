@@ -74,6 +74,12 @@ status: {
   },
   doctorId: {
       type: String
+  },
+  doctorName: {
+      type: String
+  },
+  qualifications: {  
+      type: String
   }
 });
 
@@ -155,10 +161,12 @@ app.get("/appointment_form/status", (req, res) => {
         
     });  
 
-    app.post("/confirm", (req, res) => {
+    app.post("/confirm", async (req, res) => {
       const docId=req.session.user._id;
+      const doctor= await Doctor.findOne({_id:docId});
+      console.log(doctor);
       const appointmentId=req.body.cnf;
-      Appointment.updateOne({_id:appointmentId},{meetLink: "https://meet.jit.si/" + appointmentId,status: "assigned",doctorId:docId}, function (err,app){
+      Appointment.updateOne({_id:appointmentId},{meetLink: "https://meet.jit.si/" + appointmentId,status: "assigned",doctorId:docId,doctorName:doctor.name,qualifications:doctor.qualifications}, function (err,app){
         if(err)
         {
           console.log(err)

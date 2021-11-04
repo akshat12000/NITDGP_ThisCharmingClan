@@ -51,6 +51,8 @@ exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const confirmPassword = req.body.confirmPassword;
+  const name = req.body.name;
+  const qualifications = req.body.qualifications;
   Doctor.findOne({ email: email })
     .then(userDoc => {
       if (userDoc) {
@@ -62,6 +64,8 @@ exports.postSignup = (req, res, next) => {
           const doctor = new Doctor({
             email: email,
             password: hashedPassword,
+            name: name,
+            qualifications: qualifications,
           });
           return doctor.save();
         })

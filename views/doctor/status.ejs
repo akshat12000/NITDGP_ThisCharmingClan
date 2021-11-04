@@ -76,15 +76,17 @@
                     <div class="card col-lg-4 col-md-4" style="width: 18rem; margin:auto">
                         <div class="card-header">
                             <strong>Name:</strong>
-                            <%=item.name%>
+                            <%=item.doctorName%>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><strong>Qualification:</strong>
                                 <%=item.qualifications%>
                             </li>
-                            <li class="list-group-item"><strong>Meet Link:</strong>
-                                <%=item.meetLink%>
-                            </li>
+                            <div>
+                            <form action="<%=item.meetLink%>" method="get">
+                                <button type="submit" name="cnf" class="btn-sm btn-danger"  style="margin:auto;">Meet Link</button>
+                            </form>
+                        </div>
                         </ul>
                     </div>
                     <%}%>
