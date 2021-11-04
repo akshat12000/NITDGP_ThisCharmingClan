@@ -93,7 +93,7 @@ else
 app.get("/appointment_form/status", (req, res) => {
   const curUser=req.session.user._id;
   Appointment.find({'patientId':curUser}, (err, appointments) => {
-    res.render('doctor/status',{appointments:appointments});
+    res.render('doctor/status',{appointments:appointments,isAuthenticated:true});
     })
   }
         );
@@ -110,7 +110,7 @@ app.get("/appointment_form/status", (req, res) => {
           });
           appointment.save((err) => {
               if (!err) {
-                  res.redirect("/appointment_form/status",{ isAuthenticated: true});
+                  res.redirect("/appointment_form/status");
               } else {
                   console.log(err);
               }
