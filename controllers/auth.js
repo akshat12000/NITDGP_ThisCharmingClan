@@ -22,14 +22,6 @@ exports.getAdminLogin = (req, res, next) => {
   });
 };
 
-exports.getDoctorLogin = (req, res, next) => {
-  res.render('auth/login', {
-    path: '/doctor/login',
-    pageTitle: 'Login',
-    isAuthenticated: false,
-    type: 'doctor'
-  });
-};
 
 exports.getUserSignup = (req, res, next) => {
   res.render('auth/signup', {
@@ -49,14 +41,6 @@ exports.getAdminSignup = (req, res, next) => {
   });
 };
 
-exports.getDoctorSignup = (req, res, next) => {
-  res.render('auth/signup', {
-    path: '/doctor/signup',
-    pageTitle: 'Signup',
-    isAuthenticated: false,
-    type: 'doctor'
-  });
-};
 
 exports.postUserLogin = (req, res, next) => {
   const email = req.body.email;
@@ -118,35 +102,6 @@ exports.postAdminLogin = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
-exports.postDoctorLogin = (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  Doctor.findOne({ email: email })
-    .then(doctor => {
-      if (!doctor) {
-        return res.redirect('/doctor/login');
-      }
-      bcrypt
-        .compare(password, doctor.password)
-        .then(doMatch => {
-          if (doMatch) {
-            req.session.isLoggedIn = true;
-            req.session.user = doctor;
-            req.session.isAdmin = false;
-            return req.session.save(err => {
-              console.log(err);
-              res.redirect('/');
-            });
-          }
-          res.redirect('/doctor/login');
-        })
-        .catch(err => {
-          console.log(err);
-          res.redirect('/doctor/login');
-        });
-    })
-    .catch(err => console.log(err));
-};
 
 exports.postUserSignup = (req, res, next) => {
   const email = req.body.email;
@@ -204,33 +159,6 @@ exports.postAdminSignup = (req, res, next) => {
     });
 };
 
-exports.postDoctorSignup = (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  const confirmPassword = req.body.confirmPassword;
-  Doctor.findOne({ email: email })
-    .then(doctorDoc => {
-      if (doctorDoc) {
-        return res.redirect('/doctor/signup');
-      }
-      return bcrypt
-        .hash(password, 12)
-        .then(hashedPassword => {
-          const doctor = new Doctor({
-            email: email,
-            password: hashedPassword,
-            appointments: []
-          });
-          return doctor.save();
-        })
-        .then(result => {
-          res.redirect('/doctor/login');
-        });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};
 
 exports.postLogout = (req, res, next) => {
   req.session.destroy(err => {
