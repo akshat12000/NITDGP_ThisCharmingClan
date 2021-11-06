@@ -1,5 +1,5 @@
 ## Important Instructions
-### Copy the following file in the main folder
+### Copy the following file in the folder containing "server.py"
 [Data File](https://drive.google.com/file/d/1Myi7gCxRrzvrdwXGEHnV8kGWbGGnewtE/view)
 ### Install the following python packages
 ```
