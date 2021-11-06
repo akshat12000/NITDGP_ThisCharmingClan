@@ -3,12 +3,8 @@
  }
  
  .my-inner {
-     height: 30vw;
+     height: 31vw;
      padding: 1% 7%;
- }
- 
- .navbar {
-     background-color: #e4e4e4 !important;
  }
  
  .link-section {
@@ -56,15 +52,16 @@
  .main-card-container {
      margin: auto !important;
  }
+ 
  .modify-form {
-    margin: auto;
-    width: 50%;
-}
-
-.my-form {
-    margin: auto;
-}
-
-.my-form h2 {
-    text-align: center;
-}
+     margin: auto;
+     width: 50%;
+ }
+ 
+ .my-form {
+     margin: auto;
+ }
+ 
+ .my-form h2 {
+     text-align: center;
+ }
