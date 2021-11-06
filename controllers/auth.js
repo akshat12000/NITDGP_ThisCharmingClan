@@ -14,7 +14,7 @@ exports.getUserLogin = (req, res, next) => {
 };
 
 exports.getAdminLogin = (req, res, next) => {
-  res.render('auth/login', {
+  res.render('auth/alogin', {
     path: '/admin/login',
     pageTitle: 'Login',
     isAuthenticated: false,
@@ -33,7 +33,7 @@ exports.getUserSignup = (req, res, next) => {
 };
 
 exports.getAdminSignup = (req, res, next) => {
-  res.render('auth/signup', {
+  res.render('auth/asignup', {
     path: '/admin/signup',
     pageTitle: 'Signup',
     isAuthenticated: false,
@@ -78,7 +78,7 @@ exports.postAdminLogin = (req, res, next) => {
   Admin.findOne({ email: email })
     .then(admin => {
       if (!admin) {
-        return res.redirect('/admin/login');
+        return res.redirect('/admin/alogin');
       }
       bcrypt
         .compare(password, admin.password)
@@ -92,11 +92,11 @@ exports.postAdminLogin = (req, res, next) => {
               res.redirect('/');
             });
           }
-          res.redirect('/admin/login');
+          res.redirect('/admin/alogin');
         })
         .catch(err => {
           console.log(err);
-          res.redirect('/admin/login');
+          res.redirect('/admin/alogin');
         });
     })
     .catch(err => console.log(err));
@@ -138,7 +138,7 @@ exports.postAdminSignup = (req, res, next) => {
   Admin.findOne({ email: email })
     .then(adminDoc => {
       if (adminDoc) {
-        return res.redirect('/admin/signup');
+        return res.redirect('/admin/asignup');
       }
       return bcrypt
         .hash(password, 12)
@@ -151,7 +151,7 @@ exports.postAdminSignup = (req, res, next) => {
           return admin.save();
         })
         .then(result => {
-          res.redirect('/admin/login');
+          res.redirect('/admin/alogin');
         });
     })
     .catch(err => {
