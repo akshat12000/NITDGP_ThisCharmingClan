@@ -39,20 +39,26 @@ exports.getProduct = async (req, res, next) => {
 };
 
 exports.getIndex = (req, res, next) => {
-  console.log(req.session.user);
-  Product.find()
-    .then(products => {
-      res.render('shop/index', {
-        prods: products,
-        pageTitle: 'Shop',
-        path: '/',
-        isAuthenticated: req.session.isLoggedIn,
-        isAdmin: req.session.isAdmin
+    if(req.session.isLoggedIn) {
+      Product.find()
+      .then(products => {
+        res.render('shop/index', {
+          prods: products,
+          pageTitle: 'Shop',
+          path: '/',
+          isAuthenticated: req.session.isLoggedIn,
+          isAdmin: req.session.isAdmin
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    }
+    else
+    {
+      res.redirect('/login'); 
+    }
+ 
 };
 
 exports.getCart = (req, res, next) => {
