@@ -184,6 +184,8 @@ app.get('/blog', async(req, res) => {
 })
 app.use('/articles', articleRouter)
 
+app.get('/digital-makeup',(req,res) => {
+        res.render('digital-makeup')});
 
 app.use((req, res, next) => {
     if (!req.session.user) {
