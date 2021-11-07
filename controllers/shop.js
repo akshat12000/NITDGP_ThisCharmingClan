@@ -145,17 +145,17 @@ exports.getFindProduct = (req, res, next) => {
 
 exports.postFindProduct = (req, res, next) => {
   const category = req.body.category ? req.body.category : null;
-  const color = req.body.color ? req.body.color : null;
-  const size = req.body.size ? req.body.size : null;
-  res.redirect(`/product-list?category=${category}&size=${size}&color=${color}`);
+  const skinColor = req.body.skinColor ? req.body.skinColor : null;
+  const skinType = req.body.skinType ? req.body.skinType : null;
+  res.redirect(`/product-list?category=${category}&skinType=${skinType}&skinColor=${skinColor}`);
 };
 
 exports.getProductList = (req, res, next) => {
   const category = req.query.category ? req.query.category : null;
-  const color = req.query.color ? req.query.color : null;
-  const size = req.query.size ? req.query.size : null;
-  console.log(category, color, size);
-  Product.find({ category: category, color: color, size: size })
+  const skinColor = req.query.skinColor ? req.query.skinColor : null;
+  const skinType = req.query.skinType ? req.query.skinType : null;
+  console.log(category, skinColor, skinType);
+  Product.find({ category: category, skinColor: skinColor, skinType: skinType })
     .then(products => {
         console.log(products);
         res.render('shop/product-list', {

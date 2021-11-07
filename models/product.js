@@ -28,11 +28,11 @@ const productSchema = new Schema({
     type: String,
     required: true
   },
-  color: {
+  skinColor: {
     type: String,
     required: true
   },
-  size: {
+  skinType: {
     type: String
   },
 });

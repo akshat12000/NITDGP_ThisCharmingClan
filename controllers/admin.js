@@ -15,12 +15,18 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
+  const skinColor = req.body.skinColor;
+  const category = req.body.category;
+  const skinType = req.body.skinType;
   const product = new Product({
     title: title,
     price: price,
     description: description,
     imageUrl: imageUrl,
-    userId: req.user
+    skinColor: skinColor,
+    category: category,
+    skinType: skinType,
+    userId: req.session.user
   });
   product
     .save()

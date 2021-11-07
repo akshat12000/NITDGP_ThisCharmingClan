@@ -29,12 +29,12 @@
                 <input type="text" name="category" id="category" value="<% if (editing) { %><%= product.price %><% } %>">
             </div>
             <div class="form-control">
-                <label for="size">Size</label>
-                <input type="text" name="size" id="size" value="<% if (editing) { %><%= product.size %><% } %>">
+                <label for="skinType">Skin Type</label>
+                <input type="text" name="skinType" id="skinType" value="<% if (editing) { %><%= product.skinType %><% } %>">
             </div>
             <div class="form-control">
-                <label for="color">Color</label>
-                <input type="text" name="color" id="color" value="<% if (editing) { %><%= product.color %><% } %>">
+                <label for="skinColor">Skin Color</label>
+                <input type="text" name="skinColor" id="skinColor" value="<% if (editing) { %><%= product.skinColor %><% } %>">
             </div>
             <% if (editing) { %>
                 <input type="hidden" value="<%= product._id %>" name="productId">
