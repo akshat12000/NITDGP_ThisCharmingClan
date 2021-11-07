@@ -1,0 +1,26 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <form class="login-form" action="/find-product" method="POST">
+            <div class="form-control">
+                <label for="category">Category</label>
+                <input type="text" name="category" id="category">
+            </div>
+            <div class="form-control">
+                <label for="color">Color</label>
+                <input type="text" name="color" id="color">
+            </div>
+            <div class="form-control">
+                <label for="size">Size</label>
+                <input type="text" name="size" id="size">
+            </div>
+            <button class="btn" type="submit">Find</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>

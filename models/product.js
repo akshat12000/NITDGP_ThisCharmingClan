@@ -21,9 +21,20 @@ const productSchema = new Schema({
   },
   userId: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Admin',
     required: true
-  }
+  },
+  category: {
+    type: String,
+    required: true
+  },
+  color: {
+    type: String,
+    required: true
+  },
+  size: {
+    type: String
+  },
 });
 
 module.exports = mongoose.model('Product', productSchema);

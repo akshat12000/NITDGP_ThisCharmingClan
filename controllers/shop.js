@@ -39,14 +39,20 @@ exports.getProduct = async (req, res, next) => {
 };
 
 exports.getIndex = (req, res, next) => {
-  if(!req.session.isLoggedIn){
-    res.redirect('/login');
-}
-else
-{
-  res.render('shop/index')
-}
-
+  console.log(req.session.user);
+  Product.find()
+    .then(products => {
+      res.render('shop/index', {
+        prods: products,
+        pageTitle: 'Shop',
+        path: '/',
+        isAuthenticated: req.session.isLoggedIn,
+        isAdmin: req.session.isAdmin
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
 
 exports.getCart = (req, res, next) => {
@@ -124,6 +130,41 @@ exports.getOrders = (req, res, next) => {
         isAuthenticated: req.session.isLoggedIn,
         isAdmin: req.session.isAdmin
       });
+    })
+    .catch(err => console.log(err));
+};
+
+exports.getFindProduct = (req, res, next) => {
+  res.render('shop/findProduct', {
+    path: '/find-product',
+    pageTitle: 'Find Product',
+    isAuthenticated: req.session.isLoggedIn,
+    isAdmin: req.session.isAdmin
+  });
+};
+
+exports.postFindProduct = (req, res, next) => {
+  const category = req.body.category ? req.body.category : null;
+  const color = req.body.color ? req.body.color : null;
+  const size = req.body.size ? req.body.size : null;
+  res.redirect(`/product-list?category=${category}&size=${size}&color=${color}`);
+};
+
+exports.getProductList = (req, res, next) => {
+  const category = req.query.category ? req.query.category : null;
+  const color = req.query.color ? req.query.color : null;
+  const size = req.query.size ? req.query.size : null;
+  console.log(category, color, size);
+  Product.find({ category: category, color: color, size: size })
+    .then(products => {
+        console.log(products);
+        res.render('shop/product-list', {
+          prods: products,
+          pageTitle: 'Products matching your query',
+          path: '/products',
+          isAuthenticated: req.session.isLoggedIn,
+          isAdmin: req.session.isAdmin
+        });
     })
     .catch(err => console.log(err));
 };
