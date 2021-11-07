@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blog</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="https://cdn.freelogovectors.net/svg08/myntra_logo-freelogovectors.net.svg" alt="" style="width:13vw; height:3vw;" class="d-inline-block align-text-top">
+            </a>
+            <form action="/logout" method="post">
+                <button class="btn btn-md btn-danger" type="submit">Logout</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="mb-1">
+            <%= article.title %>
+        </h1>
+        <p class="mb-1">
+            <%= article.name %>
+        </p>
+        <div class="text-muted mb-2">
+            <%= article.createdAt.toLocaleDateString() %>
+        </div>
+        <a href="/blog" class="btn btn-secondary">All Articles</a>
+        <% if(curUser==article.userId){ %>
+            <a href="/articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
+            <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <% } else{ %>
+
+                <% } %>
+
+                    <div>
+                        <%- article.sanitizedHtml %>
+                    </div>
+
+
+                    <form action="/articles/upvote/<%=article.id %>" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-primary">Upvote</button>
+                    </form>
+                    <span>
+      <%=article.voteCount%>
+    </span>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<%- include("header.ejs"); -%>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="https://cdn.freelogovectors.net/svg08/myntra_logo-freelogovectors.net.svg" alt="" style="width:13vw; height:3vw;" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="/appointment_form/status">
+                    Status
+                </a>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse" style="padding-left: 70%;" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <% if (!isAuthenticated) { %>
+                        <li class="main-header__item">
+                            <a class="nav-link active" aria-current="page" href="/login">Login</a>
+                        </li>
+                        <li class="main-header__item">
+                            <a class="nav-link active" aria-current="page" href="/signup">Signup</a>
+                        </li>
+                        <% } else { %>
+
+                            <form action="/logout" method="post">
+                                <button class="btn btn-md btn-danger" type="submit">Logout</button>
+                            </form>
+                            <% } %>
+
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <div class="row" style="width:98%;">
+        <div class="col-lg-6 col-md-6" style="border-right: 0.5px dotted #888;">
+            <h3 style="text-align: center;">Pending</h3>
+            <div class="row">
+                <%appointments.forEach((item)=>{ %>
+                    <% if(item.status==="notAssigned"){%>
+                        <div class="card col-lg-4 col-md-4" style="width: 18rem; margin:1% auto">
+                            <div class="card-header">
+                                <strong>Name:</strong>
+                                <%=item.name%>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Contact:</strong>
+                                    <%=item.contact%>
+                                </li>
+                                <li class="list-group-item"><strong>Date:</strong>
+                                    <%=item.date%>
+                                </li>
+                                <li class="list-group-item"><strong>Time:</strong>
+                                    <%=item.time%>
+                                </li>
+                                <li class="list-group-item"><strong>Symptoms:</strong>
+                                    <%=item.symptoms%>
+                                </li>
+                            </ul>
+                            <form action="/delete" method="post">
+                                <button type="submit" name="delbtn" class="btn-sm btn-danger" value=<%=item._id%> style="margin:auto;">Cancel Appointment</button>
+                            </form>
+                        </div>
+                        <%}%>
+                            <% }); %>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <h3 style="text-align: center;">Ongoing</h3>
+            <div class="row">
+                <%appointments.forEach((item)=>{ %>
+                    <% if(item.status==="assigned"){%>
+                        <div class="card col-lg-4 col-md-4" style="width: 18rem; margin:auto">
+                            <div class="card-header">
+                                <strong>Name:</strong>
+                                <%=item.doctorName%>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Qualification:</strong>
+                                    <%=item.qualifications%>
+                                </li>
+                                <div>
+                                    <form action="<%=item.meetLink%>" method="get">
+                                        <button type="submit" name="cnf" class="btn-sm btn-danger" style="margin:auto;">Meet Link</button>
+                                    </form>
+                                </div>
+                            </ul>
+                        </div>
+                        <%}%>
+                            <% }); %>
+            </div>
+        </div>
+    </div>
+    </body>
+
+    </html>

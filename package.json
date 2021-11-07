@@ -1,23 +1,38 @@
 {
-  "name": "nitdgp_thischarmingclan",
+  "name": "this-charming-clan",
   "version": "1.0.0",
-  "description": "",
+  "description": "Complete Node.js Guide",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "start-server": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/akshat12000/NITDGP_ThisCharmingClan.git"
-  },
-  "author": "This Charming Clan",
+  "author": "Maximilian Schwarzmüller",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/akshat12000/NITDGP_ThisCharmingClan/issues"
+  "devDependencies": {
+    "nodemon": "^1.19.4"
   },
-  "homepage": "https://github.com/akshat12000/NITDGP_ThisCharmingClan#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "connect-mongodb-session": "^2.0.3",
+    "dompurify": "^2.3.3",
+    "dotenv": "^10.0.0",
+    "ejs": "^2.6.1",
     "express": "^4.17.1",
-    "nodemon": "^2.0.14"
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "jsdom": "^18.0.0",
+    "marked": "^3.0.8",
+    "method-override": "^3.0.0",
+    "mongodb": "^3.1.6",
+    "mongoose": "^5.13.12",
+    "mysql2": "^1.6.1",
+    "pug": "^2.0.3",
+    "sequelize": "^5.0.0-beta.11",
+    "session": "^0.1.0",
+    "slugify": "^1.6.1",
+    "youtubei": "0.0.1-rc.27"
   }
 }
