@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config()
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -11,8 +13,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 const Doctor = require('./models/doctor');
 
-const MONGODB_URI =
-    'mongodb+srv://myntrahackathon:myntrahackathon@cluster0.vgomr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const MONGODB_URI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.vgomr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 const app = express();
 const store = new MongoDBStore({
