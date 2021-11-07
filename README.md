@@ -37,7 +37,7 @@ Shows a list of all the blogs. Users can read the complete blog by clicking on R
 -> Chatbot will provide recommendations for the best products depending on several factors. Essentially, we will specify our skin colour, skin type, and desired product, and the chatbot will recommend the product that best meets our needs. This feature will use AI, ML for accurate results.<br/>
 -> We’ll integrate digital makeup into our website and customers just need to specify the product to see live demo. We will also develop the same feature to test other beauty products such as concealer, compact, foundation etc.<br/>
 
-## TEAM NAME: This Charming Clan (Institute Name: National Institute f Technology, Durgapur)<br/>
+## TEAM NAME: This Charming Clan (Institute Name: National Institute of Technology, Durgapur)<br/>
 1. Abantika Saha<br/>
 2. Akshat Bhatnagar<br/>
 3. Arka Seth<br/>
